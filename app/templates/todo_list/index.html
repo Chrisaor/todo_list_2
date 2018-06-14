@@ -3,14 +3,37 @@
 {% block content %}
 <br>
 <div class="container">
-{% for item in items %}
-
-    <a href="">{{ item.item }}</a>
-    <a href="">{{ item.completed }}</a>
-    <a href="">Delete</a>
-
-    <br>
-
-{% endfor %}
-      </ul>  </div>
+    {% for item in items %}
+    {% if item.completed %}
+    <div class="card">
+        <h5 class="card-header bg-success"> 할 일 {{ forloop.counter }}</h5>
+        <div class="card-body">
+            <h3><a href="{% url 'detail' item.id %}">{{ item.item }}</a></h3>
+            <a href="{% url 'uncross_index' item.id %}">
+                <button class="btn btn-primary">
+                    완료
+                </button>
+            </a>
+            <a href="{% url 'delete' item.id %}">
+                <button class="btn btn-danger">Delete</button>
+            </a>
+        </div>
+    </div>
+    {% else %}
+    <div class="card">
+        <h5 class="card-header bg-secondary"> 할 일 {{ forloop.counter }}</h5>
+        <div class="card-body">
+            <h3><a href="{% url 'detail' item.id %}">{{ item.item }}</a></h3>
+            <a href="{% url 'crossoff_index' item.id %}">
+                <button class="btn btn-primary">완료하기</button>
+            </a>
+            <a href="{% url 'delete' item.id %}">
+                <button class="btn btn-danger">Delete</button>
+            </a>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
 {% endblock %}
+

@@ -1,0 +1,23 @@
+{% extends 'todo_list/base.html' %}
+
+{% block content %}
+
+<div class="card">
+    <h3 class="card-header"><a href="{% url 'edit' item.id %}">{{ item.item }}</a></h3>
+    <div class="card-body">
+        <h4 class="card-text">추가한 시간 : {{ item.added_time }}</h4>
+        {% if item.completed %}
+        <form action="" method="POST">
+            {% csrf_token %}
+        <a href="{% url 'uncross' item.id %}" class="btn btn-secondary">완료</a>
+        </form>
+        {% else %}
+        <form action="" method="POST">
+            {% csrf_token %}
+        <a href="{% url 'crossoff' item.id %}" class="btn btn-primary">완료하기</a>
+        </form>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
