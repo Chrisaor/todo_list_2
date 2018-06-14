@@ -1,7 +1,16 @@
 {% extends 'todo_list/base.html' %}
 
 {% block content %}
+<br>
+<div class="container">
 {% for item in items %}
-<h3>{{ item }}</h3>
+
+    <a href="">{{ item.item }}</a>
+    <a href="">{{ item.completed }}</a>
+    <a href="">Delete</a>
+
+    <br>
+
 {% endfor %}
+      </ul>  </div>
 {% endblock %}
